@@ -1,12 +1,13 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Popup from './components/Popup/Popup';
 import { Actions, AppContext } from './AppContext';
 import ItemBord from './components/ItemBord/ItemBord';
 
-const App: FC = () => {
+const App = () => {
   const { state, dispatch } = useContext(AppContext);
+  
   useEffect(() => {
     const name = localStorage.getItem('name');
     if (name) {
@@ -14,6 +15,7 @@ const App: FC = () => {
     }
     //eslint-disable-next-line   
   }, []);
+
   return (
     <div className="App">
       {state.popup.visible&&!localStorage.getItem('name') && <Popup />}

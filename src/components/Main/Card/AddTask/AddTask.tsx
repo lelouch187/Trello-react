@@ -11,24 +11,28 @@ interface IAddTaskProps{
 const AddTask: FC<IAddTaskProps> = ({id}) => {
   const [isVisibArea, setVisibArea] = useState(false);
   const [value, setValue] = useState('');
+  
   const {state ,dispatch} = useContext(AppContext)
+  
   const addNewTask = ()=>{
-   const task:ITask = {
-      id:nanoid(),
-      title:value,
-      description:'',
-      comments: [],
-   }
-   const cards = state.cards.map((card:ICard)=>{
-      if (card.id===id) {
-           return {...card, tasks:[...card.tasks, task]}
+   if(value.trim()){
+      const task:ITask = {
+         id:nanoid(),
+         title:value,
+         description:'',
+         comments: [],
       }
-      return card
-   })
-   dispatch({type:Actions.changeCard, payload:cards})
-   setValue('')
-   setVisibArea(prev=>!prev)
-   localStorage.setItem('cards', JSON.stringify(cards));
+      const cards = state.cards.map((card:ICard)=>{
+         if (card.id===id) {
+              return {...card, tasks:[...card.tasks, task]}
+         }
+         return card
+      })
+      dispatch({type:Actions.changeCard, payload:cards})
+      setValue('')
+      setVisibArea(prev=>!prev)
+      localStorage.setItem('cards', JSON.stringify(cards));
+   }
   }
 
   return <>{isVisibArea ? 

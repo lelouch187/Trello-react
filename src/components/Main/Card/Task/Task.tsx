@@ -11,6 +11,7 @@ interface ITaskProps {
 
 const Task: FC<ITaskProps> = ({ tasks,idCard }) => {
   const {dispatch} = useContext(AppContext)
+  
   const showTask=(idTask:string)=>{
     const activeTask = {
       isVisible:true,

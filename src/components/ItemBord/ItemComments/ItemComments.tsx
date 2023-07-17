@@ -11,10 +11,11 @@ interface IItemComments {
 }
 
 const ItemComments: FC<IItemComments> = ({ name, card, task }) => {
-  const { state, dispatch } = useContext(AppContext);
   const [visibleInput, setVisibleInput] = useState('');
   const [newComment, setNewComment] = useState('');
   const [renameComment, setRenameComment] = useState('');
+
+  const { state, dispatch } = useContext(AppContext);
 
   const saveCard = (changeTasks:ITask[]) =>{
     const newCard = { ...card, tasks: changeTasks };

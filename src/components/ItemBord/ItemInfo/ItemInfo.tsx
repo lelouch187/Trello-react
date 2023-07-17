@@ -14,7 +14,8 @@ const ItemInfo: FC<IItemInfo> = ({ name, card, task, closeCard }) => {
   const { state, dispatch } = useContext(AppContext);
   const [isVisibleInput, setVisibleInput] = useState(false);
   const [value, setValue] = useState(task.title);
-  const saveTask = (changeTask:ITask[]) => {
+
+  const saveTask = (changeTask: ITask[]) => {
     const newCard = { ...card, tasks: changeTask };
     dispatch({ type: Actions.changeTask, payload: newCard });
     const cards = state.cards.map((card: ICard) => {
@@ -24,12 +25,14 @@ const ItemInfo: FC<IItemInfo> = ({ name, card, task, closeCard }) => {
       return card;
     });
     localStorage.setItem('cards', JSON.stringify(cards));
-  }
+  };
+
   const deletecard = () => {
     const newTasks = card.tasks.filter((item: ITask) => item.id !== task.id);
-    saveTask(newTasks)
+    saveTask(newTasks);
     closeCard();
   };
+
   const chengeNameCard = () => {
     if (value.trim().length > 0) {
       const newTasks = card.tasks.map((item) => {
@@ -38,9 +41,11 @@ const ItemInfo: FC<IItemInfo> = ({ name, card, task, closeCard }) => {
         }
         return item;
       });
-      saveTask(newTasks)
+      saveTask(newTasks);
+      setVisibleInput(false);
     }
   };
+
   return (
     <div className={s.info}>
       <div className={s.title}>

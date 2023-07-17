@@ -9,8 +9,9 @@ interface ICardTitleProps {
 
 const CardTitle: FC<ICardTitleProps> = ({ titleCard }) => {
   const [value, setValue] = useState(titleCard);
-  const { state, dispatch } = useContext(AppContext);
   const [isVisibleInput, setVisibleInput] = useState(false);
+  
+  const { state, dispatch } = useContext(AppContext);
 
 
   const closeInput = () => {
@@ -24,6 +25,7 @@ const CardTitle: FC<ICardTitleProps> = ({ titleCard }) => {
     setVisibleInput((prev) => !prev);
     localStorage.setItem('cards', JSON.stringify(cards));
   };
+
   useEffect(() => {
     const storageValue = localStorage.getItem('cards');
     if (storageValue) {
@@ -32,6 +34,7 @@ const CardTitle: FC<ICardTitleProps> = ({ titleCard }) => {
     }
     //eslint-disable-next-line
   }, []);
+  
   return (
     <>
       {isVisibleInput ? (

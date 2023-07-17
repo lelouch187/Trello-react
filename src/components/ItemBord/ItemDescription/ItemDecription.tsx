@@ -11,15 +11,17 @@ interface IItemDecription {
 const ItemDecription: FC<IItemDecription> = ({ card, task }) => {
   const { state, dispatch } = useContext(AppContext);
   const [value, setValue] = useState(task.description);
+
   const cards =(changeCard:ICard)=>{
-    state.cards.map((card: ICard) => {
+   const newCards= state.cards.map((card: ICard) => {
       if (card.id === changeCard.id) {
         return changeCard;
       }
       return card;
     });
-    localStorage.setItem('cards', JSON.stringify(cards));
+    localStorage.setItem('cards', JSON.stringify(newCards));
   } 
+
   const addDescription = () => {
     const newTasks = card.tasks.map((item) => {
       if (item.id === task.id) {
@@ -31,6 +33,7 @@ const ItemDecription: FC<IItemDecription> = ({ card, task }) => {
     dispatch({ type: Actions.changeTask, payload: newCard });
     cards(newCard)
   };
+
   const deleteDescription = () =>{
     const newTasks = card.tasks.map((item) => {
       if (item.id === task.id) {
@@ -43,11 +46,13 @@ const ItemDecription: FC<IItemDecription> = ({ card, task }) => {
     cards(newCard)
     setValue('')
   }
+
   const changeDescription = () =>{
     const oldValue = value;
     deleteDescription()
     setValue(oldValue)
   }
+  
   return (
     <div className={s.description}>
       <h2 className={s.title}>Описание</h2>
